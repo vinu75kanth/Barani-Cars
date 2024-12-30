@@ -1,0 +1,28 @@
+.navBar{
+    display: flex;
+    justify-content: center;
+    /* background: #2E3944; */
+    background: black;
+    padding: 5px;
+}
+
+.titleContainer{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.img{
+    width: 50px;
+    background: transparent;
+}
+
+.titleContainer p{
+    
+}
+
+.text{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}

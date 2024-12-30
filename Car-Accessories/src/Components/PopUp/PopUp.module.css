@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header p{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.containerBox{
+    margin-top: 20px;
+}
