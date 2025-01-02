@@ -10,5 +10,12 @@
 }
 
 .containerBox{
-    margin-top: 20px;
+    margin-top: 20px;  
+    height: 50vh;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.popup{
+    
 }

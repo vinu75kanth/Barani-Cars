@@ -195,8 +195,9 @@
 }
 
 .popup{
+    margin : 0px 5px;
     height: 60vh;
-    width: 100%;
+    /* width: %; */
     background: white;
 
     position: fixed;
@@ -205,6 +206,10 @@
     left: 0;
     top: auto;
     z-index: 1000;
+
+    box-shadow: 10px 10px 10px 10px grey;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 
     padding: 10px;
 

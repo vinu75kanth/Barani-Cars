@@ -16,10 +16,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
     private String productName;
+    private String productBrand;
+
     private String carBrand;
     private String carModel;
     private String carSubModel;
-    private String productBrand;
+
 
     public int getProductId() {
         return productId;

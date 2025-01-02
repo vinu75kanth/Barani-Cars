@@ -20,7 +20,7 @@ function PopUp(props) {
             if (e.target !== popupRef.current && !popupRef.current.contains(e.target)) {
                 popupRef.current.style.bottom = "-60vh"; // Hide popup
                 document.body.classList.remove('no-scroll'); // Enable scrolling
-                console.log('clicked outside');
+                // console.log('clicked outside');
             }
         };
         document.addEventListener('click', handleClickOutside);
@@ -31,17 +31,33 @@ function PopUp(props) {
     }, []);
 
   return (
-    <div>
+    <div className={styles.popup}>
         <div className={styles.header}>
             <p className={styles.headerText}>Shop Accessories</p>
             <p className={styles.closebtn} onClick={handleClose}>❌</p>
         </div>
 
         <div className={styles.containerBox}>
-            <Container/>
-            <Container/>
-            <Container/>
-            <Container/>
+            <Container image='AshokLeyland'/>
+            <Container image='Citroen'/>
+            <Container image='Fiat'/>
+            <Container image='Force'/>
+            <Container image='Ford'/>
+            <Container image='Chevrolet'/>
+            <Container image='Honda'/>
+            <Container image='Hyundai'/>
+            <Container image='Isuzu'/>
+            <Container image='Jeep'/>
+            <Container image='Kia'/>
+            <Container image='Mahindra'/>
+            <Container image='MarutiSuzuki'/>
+            <Container image='MG'/>
+            <Container image='Nissan'/>
+            <Container image='Renault'/>
+            <Container image='Skoda'/>
+            <Container image='TataMotors'/>
+            <Container image='Toyota'/>
+            <Container image='Volkswagen'/>
         </div>
     </div>
   )
