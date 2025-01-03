@@ -25,14 +25,9 @@ public class ProductController {
         return "Hello World";
     }
 
-    @GetMapping("/products")
-    public List<Product> getProducts(){
-        return productService.getAllProducts();
-    }
-
-    @GetMapping("/getAllCarBrands")
-    public Set<String> getAllCarBrands(){
-        return productService.getAllCarBrands();
+    @GetMapping("/getCarBrands")
+    public Set<String> getCarBrands(){
+        return productService.getCarBrands();
     }
 
     @GetMapping("/getCarModelByCarBrand")
@@ -45,8 +40,18 @@ public class ProductController {
         return productService.getCarSubModelByCarBrandAndCarModel(carBrand, carModel);
     }
 
+    @GetMapping("/getProductsByCarbrand")
+    public List<Product> getProductsByCarbrand(@RequestParam String carBrand){
+        return productService.getProductsByCarBrand(carBrand);
+    }
+
+    @GetMapping("/getProductsByCarBrandByCarModel")
+    public List<Product> getProductsByCarBrandByCarModel(@RequestParam String carBrand, @RequestParam String carModel){
+        return productService.getProductsByCarBrandByCarModel(carBrand, carModel);
+    }
+
     @GetMapping("/getProductByCarBrandCarModelCarSubModel")
     public List<Product> getProductByCarBrandCarModelCarSubModel(@RequestParam String carBrand, @RequestParam String carModel, @RequestParam String carSubModel){
-        return productService.getProductByCarBrandCarModelCarSubModel(carBrand,carModel,carSubModel);
+        return productService.getProductsByCarBrandByCarModelByCarSubModel(carBrand,carModel,carSubModel);
     }
 }

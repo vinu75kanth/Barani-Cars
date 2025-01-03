@@ -1,7 +1,6 @@
 .image{
-    /* height: 50px; */
     width: 50px;
-    /* display: none; */
+    padding: 2px;
 }
 
 .Container{

@@ -20,14 +20,18 @@ public class ProductService {
         this.productRepo = productRepo;
     }
 
-    public String capitalize(String string){
+    private String capitalize(String string){
+
         String[] arr = string.split(" ");
+
         StringBuilder sb = new StringBuilder();
+
         for(String s : arr){
             sb.append(s.substring(0, 1).toUpperCase());
             sb.append(s.substring(1).toLowerCase());
             sb.append(" ");
         }
+
         return sb.substring(0,sb.length()-1);
     }
 
@@ -35,53 +39,51 @@ public class ProductService {
         return productRepo.findAll();
     }
 
-    public Set<String> getAllCarBrands() {
-        List<Product> products = productRepo.findAll();
-        Set<String> brands = new HashSet<>();
-        for (Product product : products) {
-            brands.add(capitalize(product.getCarBrand()));
+    public Set<String> getCarBrands() {
+
+        List<String> allCarBrands = productRepo.getAllCarModels();
+        Set<String> carBrands = new HashSet<>();
+
+        for(String s : allCarBrands) {
+            carBrands.add(capitalize(s));
         }
-        return brands;
+
+        return carBrands;
     }
 
     public Set<String> getCarModelByCarBrand(String carBrand) {
-        List<Product> products = productRepo.findAll();
+
+        List<String> products = productRepo.getAllCarBrandsByCarBrand(carBrand);
         Set<String> models = new HashSet<>();
-        for (Product product : products) {
-            if(product.getCarBrand().compareToIgnoreCase(carBrand) == 0) {
-                models.add(capitalize(product.getCarModel()));
-            }
+
+        for(String s : products) {
+            models.add(capitalize(s));
         }
+
         return models;
     }
 
     public Set<String> getCarSubModelByCarBrandAndCarModel(String carBrand, String carModel) {
 
-        List<Product> products = productRepo.findAll();
+        List<String> products = productRepo.getAllCarSubModelsByCarBrandByCarModel(carBrand, carModel);
         Set<String> subModels = new HashSet<>();
 
-        for (Product product : products) {
-            if(product.getCarBrand().compareToIgnoreCase(carBrand) == 0 && product.getCarModel().compareToIgnoreCase(carModel) == 0) {
-                subModels.add(capitalize(product.getCarSubModel()));
-            }
+        for(String s : products) {
+            subModels.add(capitalize(s));
         }
 
         return subModels;
     }
 
-    public List<Product> getProductByCarBrandCarModelCarSubModel(String carBrand, String carModel, String carSubModel) {
+    public List<Product> getProductsByCarBrand(String carBrand) {
+        return productRepo.findByCarBrand(carBrand);
+    }
 
-        List<Product> products = productRepo.findAll();
-        List<Product> filteredProducts = new ArrayList<>();
+    public List<Product> getProductsByCarBrandByCarModel(String carBrand, String carModel) {
+        return productRepo.findByCarBrandByCarModel(carBrand, carModel);
+    }
 
-        for (Product product : products) {
-            if(         (product.getCarBrand().compareToIgnoreCase(carBrand) == 0)
-                    &&  (product.getCarModel().compareToIgnoreCase(carModel) == 0)
-                    &&  product.getCarSubModel().compareToIgnoreCase(carSubModel) == 0) {
-                filteredProducts.add(product);
-            }
-        }
-
-        return filteredProducts;
+    public List<Product> getProductsByCarBrandByCarModelByCarSubModel(String carBrand, String carModel, String carSubModel) {
+        return productRepo.findByCarBrandByCarModelByCarSubModel(carBrand, carModel, carSubModel);
     }
 }
