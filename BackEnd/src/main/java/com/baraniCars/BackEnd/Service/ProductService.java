@@ -2,6 +2,7 @@ package com.baraniCars.BackEnd.Service;
 
 import com.baraniCars.BackEnd.Module.Product;
 import com.baraniCars.BackEnd.Repository.ProductRepo;
+import org.antlr.v4.runtime.misc.OrderedHashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class ProductService {
     public Set<String> getCarBrands() {
 
         List<String> allCarBrands = productRepo.getAllCarModels();
-        Set<String> carBrands = new HashSet<>();
+        Set<String> carBrands = new OrderedHashSet<>();
 
         for(String s : allCarBrands) {
             carBrands.add(capitalize(s));
@@ -54,7 +55,7 @@ public class ProductService {
     public Set<String> getCarModelByCarBrand(String carBrand) {
 
         List<String> products = productRepo.getAllCarBrandsByCarBrand(carBrand);
-        Set<String> models = new HashSet<>();
+        Set<String> models = new OrderedHashSet<>();
 
         for(String s : products) {
             models.add(capitalize(s));
@@ -66,7 +67,7 @@ public class ProductService {
     public Set<String> getCarSubModelByCarBrandAndCarModel(String carBrand, String carModel) {
 
         List<String> products = productRepo.getAllCarSubModelsByCarBrandByCarModel(carBrand, carModel);
-        Set<String> subModels = new HashSet<>();
+        Set<String> subModels = new OrderedHashSet<>();
 
         for(String s : products) {
             subModels.add(capitalize(s));

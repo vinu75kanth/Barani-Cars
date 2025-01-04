@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 public interface ProductRepo extends JpaRepository<Product, Integer> {
 
-    @Query("select distinct(p.carBrand) from Product p")
+    @Query("select distinct(p.carBrand) from Product p order by trim(lower(p.carBrand)) asc")
     List<String> getAllCarModels();
 
     @Query("select distinct(p.carModel) from Product p where p.carBrand = :carBrand")

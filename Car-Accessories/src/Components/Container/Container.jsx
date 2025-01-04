@@ -24,32 +24,46 @@ import Volkswagen from '../Summa/Volkswagen.png'
 function Container(props) {
   
   const imageMap = {
-    AshokLeyland,
-    Citroen,
-    Fiat,
-    Force,
-    Ford,
-    Chevrolet,
-    Honda,
-    Hyundai,
-    Isuzu,
-    Jeep,
-    Kia,
-    Mahindra,
-    MarutiSuzuki,
-    MG,
-    Nissan,
-    Renault,
-    Skoda,
-    TataMotors,
-    Toyota,
-    Volkswagen,
+    'Ashok Leyland' : AshokLeyland,
+    'Citroen' : Citroen,
+    'Fiat' : Fiat,
+    'Force' : Force,
+    'Ford' : Ford,
+    'Chevrolet' : Chevrolet,
+    'Honda' : Honda,
+    'Hyundai' : Hyundai,
+    'Isuzu' : Isuzu,
+    'Jeep' : Jeep,
+    'Kia' : Kia,
+    'Mahindra' : Mahindra,
+    'Maruti Suzuki' : MarutiSuzuki,
+    'Mg' : MG,
+    'Nissan' : Nissan,
+    'Renault' : Renault,
+    'Skoda' : Skoda,
+    'Tata Motors' : TataMotors,
+    'Toyota' : Toyota,
+    'Volkswagen' : Volkswagen,
   };
+
+  function handleClick(){
+    if(props.type === 1){
+        props.setCarBrand(props.image);
+        props.setType(2);
+    }
+    else if(props.type === 2){
+        props.setCarModel(props.image);
+        props.setType(3);
+    }
+    else if(props.type === 3){
+        props.setCarSubModel(props.image);
+    }
+  }
 
   
   const imgsrc = imageMap[props.image];
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} onClick={handleClick}>
         <img src={imgsrc} className={styles.image}></img>
         <p>{props.image}</p>
     </div>

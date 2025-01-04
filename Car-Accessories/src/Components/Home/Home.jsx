@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Home.module.css'
 import pic1 from '../../assets/car1.png'
 import pic2 from '../../assets/car2.png'
@@ -20,6 +20,8 @@ function Home() {
 
   const imgContainerRef = useRef(null);
   const popupRef = useRef(null);
+
+  const [type, setType] = useState(1);
 
   useEffect(() => {
 
@@ -50,6 +52,7 @@ function Home() {
     e.stopPropagation();
     popupRef.current.style.bottom =  "0vh";
     document.body.classList.add('no-scroll');
+    setType(1);
   }
 
   return (
@@ -212,7 +215,7 @@ function Home() {
 
 
       <div className={styles.popup} ref={popupRef}>
-        <PopUp popupRef={popupRef}/>
+        <PopUp popupRef={popupRef} type={type} setType={setType}/>
       </div>
     </div>
   )

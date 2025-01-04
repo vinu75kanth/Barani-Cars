@@ -1,11 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './PopUp.module.css'
-import { use } from 'react';
 import Container from '../Container/Container';
+import axios from 'axios';
 
 function PopUp(props) {
 
     const popupRef = props.popupRef;
+
+    const [data,setData] = useState([]);
+    const [carbrand,setCarBrand] = useState('');
+    const [carModel,setCarModel] = useState('');
+    const [carSubModel,setCarSubModel] = useState('');
 
     function handleClose(){
         popupRef.current.style.bottom = "-70vh";
@@ -14,13 +19,11 @@ function PopUp(props) {
 
     useEffect(() => {
 
-        // let firstTime = false;
 
         const handleClickOutside = (e) => {
             if (e.target !== popupRef.current && !popupRef.current.contains(e.target)) {
                 popupRef.current.style.bottom = "-60vh"; // Hide popup
                 document.body.classList.remove('no-scroll'); // Enable scrolling
-                // console.log('clicked outside');
             }
         };
         document.addEventListener('click', handleClickOutside);
@@ -30,6 +33,34 @@ function PopUp(props) {
         };
     }, []);
 
+    useEffect(() => {
+        // console.log(props.type);
+        if(props.type === 1){
+            async function fetchData(){
+                const response = await axios.get('http://localhost:8080/getCarBrands');
+                setData(response.data);
+                // console.log(response.data);
+            }
+            fetchData();
+        }
+        else if(props.type === 2){
+            async function fetchData(){
+                const response = await axios.get(`http://localhost:8080/getCarModelByCarBrand?carBrand=${carbrand}`);
+                setData(response.data);
+                // console.log(response.data);
+            }
+            fetchData();
+        }
+        else if(props.type === 3){
+            async function fetchData(){
+                const response = await axios.get(`http://localhost:8080/getCarSubModelByCarBrandAndCarModel?carBrand=${carbrand}&carModel=${carModel}`);
+                setData(response.data);
+                // console.log(response.data);
+            }
+            fetchData();
+        }
+    }, [props.type])
+    
   return (
     <div className={styles.popup}>
         <div className={styles.header}>
@@ -38,26 +69,12 @@ function PopUp(props) {
         </div>
 
         <div className={styles.containerBox}>
-            <Container image='AshokLeyland'/>
-            <Container image='Citroen'/>
-            <Container image='Fiat'/>
-            <Container image='Force'/>
-            <Container image='Ford'/>
-            <Container image='Chevrolet'/>
-            <Container image='Honda'/>
-            <Container image='Hyundai'/>
-            <Container image='Isuzu'/>
-            <Container image='Jeep'/>
-            <Container image='Kia'/>
-            <Container image='Mahindra'/>
-            <Container image='MarutiSuzuki'/>
-            <Container image='MG'/>
-            <Container image='Nissan'/>
-            <Container image='Renault'/>
-            <Container image='Skoda'/>
-            <Container image='TataMotors'/>
-            <Container image='Toyota'/>
-            <Container image='Volkswagen'/>
+            { 
+                data.map((item) => {
+                    return <Container type={props.type} image={item} key={item} setType = {props.setType}
+                            setCarBrand={setCarBrand} setCarModel={setCarModel} setCarSubModel={setCarSubModel}/>
+                })
+            }
         </div>
     </div>
   )

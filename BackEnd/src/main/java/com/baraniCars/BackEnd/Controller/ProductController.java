@@ -3,6 +3,7 @@ package com.baraniCars.BackEnd.Controller;
 import com.baraniCars.BackEnd.Module.Product;
 import com.baraniCars.BackEnd.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin
 public class ProductController {
 
     private ProductService productService;
