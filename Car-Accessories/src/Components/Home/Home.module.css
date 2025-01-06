@@ -1,3 +1,6 @@
+.home{
+    margin-top: 50px;
+}
 .container{
     display: relative;
     overflow: hidden;
@@ -15,10 +18,6 @@
     height: 300px;
 }
 
-.display{
-    display: block;
-}
-
 .star{
     color: #ffbb00;
 }
@@ -27,6 +26,7 @@
     background: linear-gradient(to right, #ffbc04 75%, black 50%);
     /* background: linear-gradient(to right, rgb(49, 219, 49) 75%, black 50%); */
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
@@ -80,38 +80,54 @@
 }
 
 .brandImg{
-    width: 50px;
+    width: 40px;
+    max-height: 40px;
+    /* height: 30px; */
+    /* background-color: green; */
 }
 
 .brand{
-    /* border: 2px solid black; */
     margin: 10px;
-    /* margin-top: 0px; */
-    width: 80px;
-    height: 80px;
+
+    min-width: 70px;
+    height: 70px;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    /* border: 1px solid black; */
 }
 
-.brandText p{
-    font-size: 15px;
+.brandText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+}
+
+.brandText span{
+    font-size: 12px;
     font-weight: 600;
 }
 
 .brandImgContainer{
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+
+
+    flex-basis: 60%;
+    /* background-color: green; */
 }
 
-.brandText{
-
-}
 
 .brandNames{
-    display: grid;
-    grid-template-columns: repeat(5,1fr);   
+    display: flex;
     overflow-x: scroll;
     scrollbar-width: none;
 }
@@ -197,7 +213,6 @@
 .popup{
     margin : 0px 5px;
     height: 60vh;
-    /* width: %; */
     background: white;
 
     position: fixed;
@@ -226,4 +241,43 @@
     display: flex;
     justify-content: space-between;
     align-items: center;  
+}
+
+
+/* products Display */
+
+.productsDisplay{
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.627);
+    position: fixed;
+    bottom: 5vh;
+    z-index: 900;
+
+
+    transition: all 0.5s ease;
+
+    left : 20px;
+    border-radius: 50%;
+    width: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productImg{
+    width: 40px;
+    max-height: 40px;
+
+    display: none;
+}
+
+.productContainer{
+    /* height: 50px; */
+    /* width: 50px; */
+    /* border: 2px solid black; */
+}
+
+.display{
+    display: block;
 }

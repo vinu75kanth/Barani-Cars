@@ -1,9 +1,19 @@
 .navBar{
     display: flex;
     justify-content: center;
-    /* background: #2E3944; */
     background: black;
     padding: 5px;
+    width: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5000;
+
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
 }
 
 .titleContainer{
@@ -17,9 +27,6 @@
     background: transparent;
 }
 
-.titleContainer p{
-    
-}
 
 .text{
     color: white;

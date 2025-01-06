@@ -54,6 +54,7 @@ public class ProductController {
 
     @GetMapping("/getProductByCarBrandCarModelCarSubModel")
     public List<Product> getProductByCarBrandCarModelCarSubModel(@RequestParam String carBrand, @RequestParam String carModel, @RequestParam String carSubModel){
+        System.out.println(carBrand+" "+carModel+" "+carSubModel);
         return productService.getProductsByCarBrandByCarModelByCarSubModel(carBrand,carModel,carSubModel);
     }
 }

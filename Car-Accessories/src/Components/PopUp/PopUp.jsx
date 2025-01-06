@@ -7,23 +7,26 @@ function PopUp(props) {
 
     const popupRef = props.popupRef;
 
-    const [data,setData] = useState([]);
-    const [carbrand,setCarBrand] = useState('');
-    const [carModel,setCarModel] = useState('');
-    const [carSubModel,setCarSubModel] = useState('');
+    const [popData,setPopData] = useState([]);
+    const [carBrand,setCarBrand] = [props.carBrand,props.setCarBrand];
+    const [carModel,setCarModel] = [props.carModel,props.setCarModel];
+    const [carSubModel,setCarSubModel] = [props.carSubModel,props.setCarSubModel];
 
-    function handleClose(){
-        popupRef.current.style.bottom = "-70vh";
+    function handleClose(flag){
+        popupRef.current.style.bottom = "-60vh";
         document.body.classList.remove('no-scroll');
+        props.setType(1);
+        if(flag === false){
+            setCarBrand('');
+            setCarModel('');
+            setCarSubModel('');
+        }
     }
 
     useEffect(() => {
-
-
         const handleClickOutside = (e) => {
             if (e.target !== popupRef.current && !popupRef.current.contains(e.target)) {
-                popupRef.current.style.bottom = "-60vh"; // Hide popup
-                document.body.classList.remove('no-scroll'); // Enable scrolling
+                handleClose();
             }
         };
         document.addEventListener('click', handleClickOutside);
@@ -34,30 +37,30 @@ function PopUp(props) {
     }, []);
 
     useEffect(() => {
-        // console.log(props.type);
         if(props.type === 1){
             async function fetchData(){
                 const response = await axios.get('http://localhost:8080/getCarBrands');
-                setData(response.data);
-                // console.log(response.data);
+                setPopData(response.data);
             }
             fetchData();
         }
-        else if(props.type === 2){
+        if(props.type === 2){
             async function fetchData(){
-                const response = await axios.get(`http://localhost:8080/getCarModelByCarBrand?carBrand=${carbrand}`);
-                setData(response.data);
-                // console.log(response.data);
+                const response = await axios.get(`http://localhost:8080/getCarModelByCarBrand?carBrand=${carBrand}`);
+                setPopData(response.data);
             }
             fetchData();
         }
         else if(props.type === 3){
             async function fetchData(){
-                const response = await axios.get(`http://localhost:8080/getCarSubModelByCarBrandAndCarModel?carBrand=${carbrand}&carModel=${carModel}`);
-                setData(response.data);
-                // console.log(response.data);
+                const response = await axios.get(`http://localhost:8080/getCarSubModelByCarBrandAndCarModel?carBrand=${carBrand}&carModel=${carModel}`);
+                setPopData(response.data);
             }
             fetchData();
+        }
+        else if(props.type == 4){
+            handleClose(true);
+            props.openProductsDisplay();
         }
     }, [props.type])
     
@@ -70,9 +73,10 @@ function PopUp(props) {
 
         <div className={styles.containerBox}>
             { 
-                data.map((item) => {
+                popData.map((item) => {
                     return <Container type={props.type} image={item} key={item} setType = {props.setType}
-                            setCarBrand={setCarBrand} setCarModel={setCarModel} setCarSubModel={setCarSubModel}/>
+                            setCarBrand={setCarBrand} setCarModel={setCarModel} setCarSubModel={setCarSubModel}
+                            imageMap={props.imageMap}/>
                 })
             }
         </div>

@@ -1,50 +1,29 @@
 import React from 'react'
 import styles from './Container.module.css'
-import AshokLeyland from '../Summa/AshokLeyland.png'
-import Citroen from '../Summa/Citroen.png'
-import Fiat from '../Summa/Fiat.png'
-import Force from '../Summa/Force.png'
-import Ford from '../Summa/Ford.png'
-import Chevrolet from '../Summa/Chevrolet.png'
-import Honda from '../Summa/Honda.png'
-import Hyundai from '../Summa/Hyundai.png'
-import Isuzu from '../Summa/Isuzu.png'
-import Jeep from '../Summa/Jeep.png'
-import Kia from '../Summa/Kia.png'
-import Mahindra from '../Summa/Mahindra.png'
-import MarutiSuzuki from '../Summa/MarutiSuzuki.png'
-import MG from '../Summa/MG.png'
-import Nissan from '../Summa/Nissan.png'
-import Renault from '../Summa/Renault.png'
-import Skoda from '../Summa/Skoda.png'
-import TataMotors from '../Summa/TataMotors.png'
-import Toyota from '../Summa/Toyota.png'
-import Volkswagen from '../Summa/Volkswagen.png'
+// import AshokLeyland from '../Summa/AshokLeyland.png'
+// import Citroen from '../Summa/Citroen.png'
+// import Fiat from '../Summa/Fiat.png'
+// import Force from '../Summa/Force.png'
+// import Ford from '../Summa/Ford.png'
+// import Chevrolet from '../Summa/Chevrolet.png'
+// import Honda from '../Summa/Honda.png'
+// import Hyundai from '../Summa/Hyundai.png'
+// import Isuzu from '../Summa/Isuzu.png'
+// import Jeep from '../Summa/Jeep.png'
+// import Kia from '../Summa/Kia.png'
+// import Mahindra from '../Summa/Mahindra.png'
+// import MarutiSuzuki from '../Summa/MarutiSuzuki.png'
+// import MG from '../Summa/MG.png'
+// import Nissan from '../Summa/Nissan.png'
+// import Renault from '../Summa/Renault.png'
+// import Skoda from '../Summa/Skoda.png'
+// import TataMotors from '../Summa/TataMotors.png'
+// import Toyota from '../Summa/Toyota.png'
+// import Volkswagen from '../Summa/Volkswagen.png'
 
 function Container(props) {
   
-  const imageMap = {
-    'Ashok Leyland' : AshokLeyland,
-    'Citroen' : Citroen,
-    'Fiat' : Fiat,
-    'Force' : Force,
-    'Ford' : Ford,
-    'Chevrolet' : Chevrolet,
-    'Honda' : Honda,
-    'Hyundai' : Hyundai,
-    'Isuzu' : Isuzu,
-    'Jeep' : Jeep,
-    'Kia' : Kia,
-    'Mahindra' : Mahindra,
-    'Maruti Suzuki' : MarutiSuzuki,
-    'Mg' : MG,
-    'Nissan' : Nissan,
-    'Renault' : Renault,
-    'Skoda' : Skoda,
-    'Tata Motors' : TataMotors,
-    'Toyota' : Toyota,
-    'Volkswagen' : Volkswagen,
-  };
+  const imageMap = props.imageMap;
 
   function handleClick(){
     if(props.type === 1){
@@ -57,6 +36,7 @@ function Container(props) {
     }
     else if(props.type === 3){
         props.setCarSubModel(props.image);
+        props.setType(4);
     }
   }
 

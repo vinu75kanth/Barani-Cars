@@ -1,0 +1,35 @@
+.productsDisplay{
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.627);
+    position: fixed;
+    bottom: 5vh;
+    z-index: 900;
+
+
+    transition: all 0.5s ease;
+
+    left : 20px;
+    border-radius: 50%;
+    width: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productImg{
+    width: 40px;
+    max-height: 40px;
+
+    display: none;
+}
+
+.productContainer{
+    height: 50px;
+    width: 50px;
+    border: 2px solid black;
+}
+
+.display{
+    display: block;
+}

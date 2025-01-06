@@ -6,15 +6,40 @@ import pic3 from '../../assets/car3.png'
 import since from '../../assets/since.png'
 import trust from '../../assets/trust.png'
 import quality from '../../assets/quality.png'
-import mahindra from '../../assets/Mahindra.png'
-import suzuki from '../../assets/Suzuki.png'
-import kia from '../../assets/Kia.png'
 import camera from '../../assets/Camera.jpg'
 import carCharger from '../../assets/CarCharger.jpg'
 import seatCover from '../../assets/SeatCover.jpg'
 import dustRemoverSpray from '../../assets/DustRemoveSpray.jpg'
 import rightArrow from '../../assets/arrow-right-solid.svg'
+import home from '../../assets/home.png'
+import homeRed from '../../assets/home_red.png'
+import products from '../../assets/best-product.png'
 import PopUp from '../PopUp/PopUp'
+
+//images import
+import AshokLeyland from '../Summa/AshokLeyland.png'
+import Citroen from '../Summa/Citroen.png'
+import Fiat from '../Summa/Fiat.png'
+import Force from '../Summa/Force.png'
+import Ford from '../Summa/Ford.png'
+import Chevrolet from '../Summa/Chevrolet.png'
+import Honda from '../Summa/Honda.png'
+import Hyundai from '../Summa/Hyundai.png'
+import Isuzu from '../Summa/Isuzu.png'
+import Jeep from '../Summa/Jeep.png'
+import Kia from '../Summa/Kia.png'
+import Mahindra from '../Summa/Mahindra.png'
+import MarutiSuzuki from '../Summa/MarutiSuzuki.png'
+import MG from '../Summa/MG.png'
+import Nissan from '../Summa/Nissan.png'
+import Renault from '../Summa/Renault.png'
+import Skoda from '../Summa/Skoda.png'
+import TataMotors from '../Summa/TataMotors.png'
+import Toyota from '../Summa/Toyota.png'
+import Volkswagen from '../Summa/Volkswagen.png'
+import axios from 'axios'
+import Product from '../Product/Product'
+import ProductsDisplay from '../ProductsDisplay/ProductsDisplay'
 
 function Home() {
 
@@ -48,6 +73,20 @@ function Home() {
     
   }, [])
 
+  const [data,setData] = useState([]);
+
+  const [carBrand,setCarBrand] = useState('');
+  const [carModel,setCarModel] = useState('');
+  const [carSubModel,setCarSubModel] = useState('');
+
+  useEffect(() => {
+    async function fetchData(){
+      const response = await axios.get('http://localhost:8080/getCarBrands');
+      setData(response.data);
+    }
+    fetchData();
+  }, [])
+
   function handlearrowclick(e){
     e.stopPropagation();
     popupRef.current.style.bottom =  "0vh";
@@ -55,8 +94,87 @@ function Home() {
     setType(1);
   }
 
+  function brandClick(e,item){
+    e.stopPropagation();
+    popupRef.current.style.bottom =  "0vh";
+    document.body.classList.add('no-scroll');
+    setType(2);
+    setCarBrand(item);
+  }
+
+  const productDisplayRef = useRef(null);
+
+
+  const productRef1 = useRef(null);
+  const productRef2 = useRef(null);
+
+  const [productData,setProductData] = useState([]);
+
+  function openProductsDisplay(e,bool){
+    if(bool === true)
+      e.stopPropagation();
+    //changing circle to rectangle
+    
+    productDisplayRef.current.style.bottom = "-90vh";
+    productDisplayRef.current.style.height = "90vh";
+    productDisplayRef.current.style.borderRadius = "0";
+    productDisplayRef.current.style.left = "0";
+    productDisplayRef.current.style.width = "100%";
+    productDisplayRef.current.style.backgroundColor = "white";
+
+    productDisplayRef.current.style.bottom = "0vh"
+    document.body.classList.add('no-scroll');
+
+    productRef1.current.classList.remove(styles.display);
+    productRef2.current.classList.add(styles.display);
+
+    async function fetchData(){
+      const response = await axios.get(`http://localhost:8080/getProductByCarBrandCarModelCarSubModel?carBrand=${carBrand}&carModel=${carModel}&carSubModel=${carSubModel}`);
+      setProductData(response.data);
+      console.log(response.data);
+    }
+    fetchData();
+  }
+
+  function takeToHome(){
+    productDisplayRef.current.style.bottom = "5vh";
+    productDisplayRef.current.style.height = "50px";
+    productDisplayRef.current.style.borderRadius = "50%";
+    productDisplayRef.current.style.left = "20px";
+    productDisplayRef.current.style.width = "50px";
+    productDisplayRef.current.style.backgroundColor = "rgba(0, 0, 0, 0.627)";
+
+    document.body.classList.remove('no-scroll');
+
+    productRef2.current.classList.remove(styles.display);
+    productRef1.current.classList.add(styles.display);
+  }
+
+  const imageMap = {
+    'Ashok Leyland' : AshokLeyland,
+    'Citroen' : Citroen,
+    'Fiat' : Fiat,
+    'Force' : Force,
+    'Ford' : Ford,
+    'Chevrolet' : Chevrolet,
+    'Honda' : Honda,
+    'Hyundai' : Hyundai,
+    'Isuzu' : Isuzu,
+    'Jeep' : Jeep,
+    'Kia' : Kia,
+    'Mahindra' : Mahindra,
+    'Maruti Suzuki' : MarutiSuzuki,
+    'Mg' : MG,
+    'Nissan' : Nissan,
+    'Renault' : Renault,
+    'Skoda' : Skoda,
+    'Tata Motors' : TataMotors,
+    'Toyota' : Toyota,
+    'Volkswagen' : Volkswagen,
+  };
+
   return (
-    <div>
+    <div className={styles.home}>
       {/* images */}
       <div className={styles.container}>
         <div ref={imgContainerRef} className={styles.imgContainer}>
@@ -104,15 +222,6 @@ function Home() {
             <p className={styles.ratingText}>G-Maps Rating</p>
           </div>
 
-          {/* dummy
-          <div className={styles.sinceContainer}>
-            <img src={trust} className={styles.since}></img>
-            <div className={styles.trustedText}>
-              <p className={styles.Text}>Trusted by</p>
-              <p className={styles.Text}>5000+ customers</p>
-            </div>
-          </div> */}
-
         </div>
       </div>
 
@@ -125,54 +234,20 @@ function Home() {
 
         <div className={styles.brandNames}>
 
-          <div className={styles.brand}>
-            <div className={styles.brandImgContainer}>
-              <img src={mahindra} className={styles.brandImg}></img>
-            </div>
-            <div className={styles.brandText}>
-              <p>Mahindra</p>
-            </div>
-          </div>
-
-          <div className={styles.brand}>
-            <div className={styles.brandImgContainer}>
-              <img src={suzuki} className={styles.brandImg}></img>
-            </div>
-            <div className={styles.brandText}>
-              <p>Suzuki</p>
-            </div>
-          </div>
-
-          <div className={styles.brand}>
-            <div className={styles.brandImgContainer}>
-              <img src={kia} className={styles.brandImg}></img>
-            </div>
-            <div className={styles.brandText}>
-              <p>Kia</p>
-            </div>
-          </div>
-
-          <div className={styles.brand}>
-            <div className={styles.brandImgContainer}>
-              <img src={suzuki} className={styles.brandImg}></img>
-            </div>
-            <div className={styles.brandText}>
-              <p>Suzuki</p>
-            </div>
-          </div>
-
-          <div className={styles.brand}>
-            <div className={styles.brandImgContainer}>
-              <img src={mahindra} className={styles.brandImg}></img>
-            </div>
-            <div className={styles.brandText}>
-              <p>Mahindra</p>
-            </div>
-          </div>
-
+          {
+            data.map((item) => {
+              return  <div className={styles.brand} key={item} onClick={(e)=>brandClick(e,item)}>
+                        <div className={styles.brandImgContainer}>
+                          <img src={imageMap[item]} className={styles.brandImg}></img>
+                        </div>
+                        <div className={styles.brandText}>
+                          <span>{item.split(" ")}</span>
+                        </div>
+                      </div>
+            })
+          }
         </div>
       </div>
-
 
       <div className={styles.shopByContainer}>
         <p>Shop Accessories <span>By Type</span></p>
@@ -212,13 +287,18 @@ function Home() {
           sint saepe assumenda quas, qui dignissimos nulla? Odit, dicta aliquam?</p>
       </div>
 
-
-
       <div className={styles.popup} ref={popupRef}>
-        <PopUp popupRef={popupRef} type={type} setType={setType}/>
+        <PopUp popupRef={popupRef} type={type} setType={setType} imageMap={imageMap} openProductsDisplay={openProductsDisplay}
+        carBrand={carBrand} setCarBrand={setCarBrand} 
+        carModel={carModel} setCarModel={setCarModel}
+        carSubModel={carSubModel} setCarSubModel={setCarSubModel}
+        />
       </div>
+
+      <ProductsDisplay/>
     </div>
   )
 }
 
 export default Home
+

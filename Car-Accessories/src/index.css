@@ -5,8 +5,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    /* font-style: italic; */
     font-size: 20px;
+    scrollbar-width: none;
 }
 
 body{
@@ -15,5 +15,9 @@ body{
 }
 
 .no-scroll{
-    overflow: hidden;
+    overflow: hidden !important;
+}
+
+.display{
+    display: block;
 }
